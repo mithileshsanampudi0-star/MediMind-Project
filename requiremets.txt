@@ -35,4 +35,5 @@ greenlet
 orjson
 requests-toolbelt
 langsmith
+pypdf
 gunicorn
