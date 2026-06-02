@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="ai-page-header">
+
+    <h1 class="page-title">
+        Medical Report Intelligence
+    </h1>
+
+    <p class="page-subtitle">
+        Upload medical reports for AI-powered analysis and interpretation.
+    </p>
+
+</div>
+
+<div class="upload-layout">
+
+    <div class="card upload-card">
+
+        <div class="section-title">
+            Upload Medical Report
+        </div>
+
+        <form
+            action="{{ url_for('reports.analyze_report') }}"
+            method="POST"
+            enctype="multipart/form-data"
+        >
+
+            <div class="upload-zone">
+
+                <div class="upload-icon">
+                    📄
+                </div>
+
+                <h3>
+                    Select Report File
+                </h3>
+
+                <p>
+                    Supported formats:
+                    PDF
+                </p>
+
+                <input
+                    type="file"
+                    name="report"
+                    required
+                >
+
+            </div>
+
+            <button
+                type="submit"
+                class="btn upload-btn"
+            >
+                Analyze Report
+            </button>
+
+        </form>
+
+    </div>
+
+    <div class="card">
+
+        <div class="section-title">
+            AI Report Processing
+        </div>
+
+        <div class="pipeline">
+
+            <div class="pipeline-step">
+                <span>01</span>
+                Extract Medical Text
+            </div>
+
+            <div class="pipeline-step">
+                <span>02</span>
+                Identify Medical Findings
+            </div>
+
+            <div class="pipeline-step">
+                <span>03</span>
+                Detect Abnormal Values
+            </div>
+
+            <div class="pipeline-step">
+                <span>04</span>
+                Generate Clinical Summary
+            </div>
+
+            <div class="pipeline-step">
+                <span>05</span>
+                Create Health Report
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card">
+
+    <div class="section-title">
+        Supported Documents
+    </div>
+
+    <div class="feature-grid">
+
+        <div class="feature-box">
+            Blood Reports
+        </div>
+
+        <div class="feature-box">
+            Diagnostic Reports
+        </div>
+
+        <div class="feature-box">
+            Scan Reports
+        </div>
+
+        <div class="feature-box">
+            Health Summaries
+        </div>
+
+        <div class="feature-box">
+            Prescription Records
+        </div>
+
+        <div class="feature-box">
+            Clinical Documents
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

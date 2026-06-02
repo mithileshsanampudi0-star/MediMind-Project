@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block auth_content %}
+
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <div class="auth-logo">
+
+            <h1>MediMind AI</h1>
+
+            <p>
+                Healthcare Intelligence Platform
+            </p>
+
+        </div>
+
+        <div class="auth-header">
+
+            <h2>
+                Create Account
+            </h2>
+
+            <p>
+                Join the AI-powered healthcare platform
+            </p>
+
+        </div>
+
+        {% if error %}
+
+        <div class="auth-alert">
+
+            {{ error }}
+
+        </div>
+
+        {% endif %}
+
+        <form
+            method="POST"
+            action="/auth/register"
+        >
+
+            <div class="form-group">
+
+                <label>
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    name="username"
+                    placeholder="Choose a username"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Create a password"
+                    required
+                >
+
+            </div>
+
+            <button
+                type="submit"
+                class="auth-btn"
+            >
+                Create Account
+            </button>
+
+        </form>
+
+        <div class="auth-footer">
+
+            <p>
+
+                Already have an account?
+
+                <a href="/auth/login">
+
+                    Sign In
+
+                </a>
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

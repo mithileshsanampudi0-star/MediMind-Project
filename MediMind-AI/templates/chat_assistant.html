@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="dashboard-header">
+
+    <div>
+
+        <h1 class="page-title">
+            Medical AI Assistant
+        </h1>
+
+        <p class="page-subtitle">
+            Ask health-related questions and receive AI-powered guidance.
+        </p>
+
+    </div>
+
+</div>
+
+<div class="chat-wrapper">
+
+    <div class="chat-container">
+
+        <div
+            id="chatMessages"
+            class="chat-messages"
+        >
+
+            {% if history %}
+
+                {% for message in history %}
+
+                    <div
+                        class="
+                        chat-message
+                        {% if message.role == 'user' %}
+                            user-message
+                        {% else %}
+                            ai-message
+                        {% endif %}
+                        "
+                    >
+
+                        <div class="message-role">
+
+                            {% if message.role == "user" %}
+                                You
+                            {% else %}
+                                MediMind AI
+                            {% endif %}
+
+                        </div>
+
+                        <div class="message-content">
+
+                            {{ message.message }}
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="welcome-card">
+
+                    <h2>
+                        Welcome to MediMind AI
+                    </h2>
+
+                    <p>
+                        Describe symptoms or ask
+                        health-related questions.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+        <div class="chat-input-area">
+
+            <textarea
+                id="messageInput"
+                placeholder="Describe symptoms or ask a health question..."
+                rows="3"
+            ></textarea>
+
+            <div class="chat-actions">
+
+                <button
+                    id="sendButton"
+                    class="btn"
+                >
+                    Send Message
+                </button>
+
+                <a
+                    href="/chat/clear"
+                    class="btn secondary-btn"
+                >
+                    Clear Chat
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/chat.js'
+    ) }}"
+></script>
+
+{% endblock %}

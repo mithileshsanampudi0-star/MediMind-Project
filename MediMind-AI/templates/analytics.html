@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="dashboard-header">
+
+    <div>
+
+        <h1 class="page-title">
+            Healthcare Analytics
+        </h1>
+
+        <p class="page-subtitle">
+            Insights generated from patient analyses.
+        </p>
+
+    </div>
+
+</div>
+
+<!-- Analytics Summary -->
+
+<div class="stats-grid">
+
+    <div class="stat-card">
+
+        <h4>Total Analyses</h4>
+
+        <h2>
+            {{ total_records }}
+        </h2>
+
+    </div>
+
+    <div class="stat-card">
+
+        <h4>Emergency Cases</h4>
+
+        <h2>
+            {{ emergency_cases }}
+        </h2>
+
+    </div>
+
+</div>
+
+<!-- Charts -->
+
+<div class="analytics-grid">
+
+    <div class="card">
+
+        <div class="section-title">
+            Risk Distribution
+        </div>
+
+        <canvas
+            id="riskChart"
+            height="150"
+        ></canvas>
+
+    </div>
+
+    <div class="card">
+
+        <div class="section-title">
+            Analysis Overview
+        </div>
+
+        <canvas
+            id="analysisChart"
+            height="150"
+        ></canvas>
+
+    </div>
+
+</div>
+
+<!-- Hidden Data -->
+
+<input
+    type="hidden"
+    id="lowRisk"
+    value="{{ risk_counts['Low'] }}"
+>
+
+<input
+    type="hidden"
+    id="mediumRisk"
+    value="{{ risk_counts['Medium'] }}"
+>
+
+<input
+    type="hidden"
+    id="highRisk"
+    value="{{ risk_counts['High'] }}"
+>
+
+<input
+    type="hidden"
+    id="totalRecords"
+    value="{{ total_records }}"
+>
+
+<input
+    type="hidden"
+    id="emergencyCases"
+    value="{{ emergency_cases }}"
+>
+
+<!-- Chart JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="{{ url_for('static',
+filename='js/chart.js') }}">
+</script>
+
+{% endblock %}

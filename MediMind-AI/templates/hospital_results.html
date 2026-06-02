@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="ai-page-header">
+
+    <h1 class="page-title">
+        Healthcare Network Finder
+    </h1>
+
+    <p class="page-subtitle">
+        Recommended healthcare facilities based on your medical analysis.
+    </p>
+
+</div>
+
+<div class="search-panel card">
+
+    <form
+        action="{{ url_for('hospitals.hospital_search') }}"
+        method="POST"
+    >
+
+        <div class="form-row">
+            <label for="location">Location</label>
+            <input
+                id="location"
+                type="text"
+                name="location"
+                placeholder="Enter city, address, or ZIP"
+                required
+            >
+        </div>
+
+        <div class="form-row">
+            <label for="specialist">Specialist (optional)</label>
+            <input
+                id="specialist"
+                type="text"
+                name="specialist"
+                placeholder="e.g., cardiology, pediatrics"
+            >
+        </div>
+
+        <button type="submit" class="btn">
+            Find Hospitals
+        </button>
+
+    </form>
+
+</div>
+
+{% if error_message %}
+<div class="card error-state">
+    <p>{{ error_message }}</p>
+</div>
+{% endif %}
+
+{% if hospitals %}
+
+<div class="hospital-grid">
+
+    {% for hospital in hospitals %}
+
+    <div class="hospital-card">
+
+        <div class="hospital-header">
+
+            <h2>{{ hospital.name }}</h2>
+
+            {% if hospital.rating %}
+            <div class="rating-badge">
+                ★ {{ hospital.rating }}
+            </div>
+            {% endif %}
+
+        </div>
+
+        <div class="hospital-info">
+
+            <p>
+                <strong>Address:</strong>
+                {{ hospital.address }}
+            </p>
+
+            {% if hospital.phone %}
+            <p>
+                <strong>Phone:</strong>
+                {{ hospital.phone }}
+            </p>
+            {% endif %}
+
+            {% if hospital.specialty %}
+            <p>
+                <strong>Specialty:</strong>
+                {{ hospital.specialty }}
+            </p>
+            {% endif %}
+
+        </div>
+
+        <div class="hospital-actions">
+
+            {% if hospital.maps_url %}
+            <a
+                href="{{ hospital.maps_url }}"
+                target="_blank"
+                class="action-btn"
+            >
+                Open in Maps
+            </a>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% else %}
+
+<div class="card empty-state">
+
+    <h2>
+        No Hospitals Found
+    </h2>
+
+    <p>
+        Try searching again with a different location.
+    </p>
+
+</div>
+
+{% endif %}
+
+{% endblock %}

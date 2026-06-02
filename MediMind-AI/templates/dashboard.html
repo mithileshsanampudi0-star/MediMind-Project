@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="dashboard-header">
+    <div>
+        <h1 class="page-title">Medical Intelligence Center</h1>
+        <p class="page-subtitle">
+            AI-powered healthcare analytics and diagnostic insights
+        </p>
+    </div>
+
+    <div class="ai-status glow">
+        <span class="pulse"></span>
+        AI System Active
+    </div>
+</div>
+
+<!-- ===================================== -->
+<!-- ANALYTICS GRID -->
+<!-- ===================================== -->
+
+<div class="stats-grid">
+
+    <div class="stat-card glow-card">
+        <div class="stat-icon">📊</div>
+        <div>
+            <h4>Total Analyses</h4>
+            <h2>{{ stats.total_analyses }}</h2>
+        </div>
+    </div>
+
+    <div class="stat-card glow-card">
+        <div class="stat-icon">📄</div>
+        <div>
+            <h4>Reports Processed</h4>
+            <h2>{{ stats.total_reports }}</h2>
+        </div>
+    </div>
+
+    <div class="stat-card glow-card">
+        <div class="stat-icon">🏥</div>
+        <div>
+            <h4>Hospital Searches</h4>
+            <h2>{{ stats.total_hospital_searches }}</h2>
+        </div>
+    </div>
+
+    <div class="stat-card danger-card">
+        <div class="stat-icon">⚠</div>
+        <div>
+            <h4>Emergency Cases</h4>
+            <h2>{{ stats.emergency_cases }}</h2>
+        </div>
+    </div>
+
+</div>
+
+<!-- ===================================== -->
+<!-- HEALTH SCORE PANEL -->
+<!-- ===================================== -->
+
+<div class="health-panel card">
+
+    <div class="panel-header">
+        <h3>System Health Overview</h3>
+    </div>
+
+    <div class="health-grid">
+
+        <div class="health-widget">
+            <div class="circle">
+                <span>97%</span>
+            </div>
+            <h4>AI Accuracy</h4>
+        </div>
+
+        <div class="health-widget">
+            <div class="circle">
+                <span>99%</span>
+            </div>
+            <h4>System Uptime</h4>
+        </div>
+
+        <div class="health-widget">
+            <div class="circle">
+                <span>94%</span>
+            </div>
+            <h4>Prediction Confidence</h4>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ===================================== -->
+<!-- QUICK ACTIONS -->
+<!-- ===================================== -->
+
+<div class="quick-actions">
+
+    <a href="/symptoms" class="action-card">
+        <h3>Symptom Analysis</h3>
+        <p>Run AI-powered medical assessment</p>
+    </a>
+
+    <a href="/reports/upload" class="action-card">
+        <h3>Medical Reports</h3>
+        <p>Upload and analyze documents</p>
+    </a>
+
+    <a href="/hospitals" class="action-card">
+        <h3>Hospital Finder</h3>
+        <p>Locate nearby healthcare centers</p>
+    </a>
+
+</div>
+
+<!-- ===================================== -->
+<!-- RECENT ANALYSIS -->
+<!-- ===================================== -->
+
+<div class="card">
+
+    <div class="panel-header">
+        <h3>Recent Medical Analyses</h3>
+    </div>
+
+    {% if recent_analyses %}
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Symptoms</th>
+                <th>Risk Level</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        {% for item in recent_analyses %}
+
+            <tr>
+
+                <td>{{ item.created_at }}</td>
+
+                <td>
+                    {{ item.symptoms[:80] }}
+                </td>
+
+                <td>
+
+                    {% if item.risk_level|lower == "high" %}
+                        <span class="badge high">
+                            High Risk
+                        </span>
+
+                    {% elif item.risk_level|lower == "medium" %}
+                        <span class="badge medium">
+                            Medium Risk
+                        </span>
+
+                    {% else %}
+                        <span class="badge low">
+                            Low Risk
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+                <td>{{ item.status }}</td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    {% else %}
+
+    <div class="empty-state">
+
+        <h3>No Analysis Data Available</h3>
+
+        <p>
+            Start by performing a symptom analysis.
+        </p>
+
+        <a href="/symptoms" class="btn">
+            Analyze Symptoms
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

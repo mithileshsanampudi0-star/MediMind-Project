@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="ai-page-header">
+
+    <div>
+        <h1 class="page-title">
+            AI Symptom Intelligence
+        </h1>
+
+        <p class="page-subtitle">
+            Describe your symptoms and receive AI-powered medical insights.
+        </p>
+    </div>
+
+</div>
+
+<div class="ai-analysis-container">
+
+    <div class="card symptom-card">
+
+        <div class="section-title">
+            Symptom Input
+        </div>
+
+        <form action="/symptoms/analyze" method="POST">
+
+            <label>
+                Describe Your Symptoms
+            </label>
+
+            <textarea
+                name="symptoms"
+                rows="8"
+                placeholder="Example: Fever for 3 days, headache, sore throat, fatigue, mild cough..."
+                required
+            ></textarea>
+
+            <div class="input-actions">
+
+                <button
+                    type="button"
+                    id="voiceBtn"
+                    class="btn-secondary"
+                >
+                    Start Voice Input
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn analyze-btn"
+                >
+                    Analyze Symptoms
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="card ai-info-card">
+
+        <div class="section-title">
+            AI Analysis Pipeline
+        </div>
+
+        <div class="pipeline">
+
+            <div class="pipeline-step">
+                <span>01</span>
+                Symptom Extraction
+            </div>
+
+            <div class="pipeline-step">
+                <span>02</span>
+                Disease Prediction
+            </div>
+
+            <div class="pipeline-step">
+                <span>03</span>
+                Risk Assessment
+            </div>
+
+            <div class="pipeline-step">
+                <span>04</span>
+                Emergency Detection
+            </div>
+
+            <div class="pipeline-step">
+                <span>05</span>
+                Specialist Recommendation
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card">
+
+    <div class="section-title">
+        Supported Analysis
+    </div>
+
+    <div class="feature-grid">
+
+        <div class="feature-box">
+            Disease Prediction
+        </div>
+
+        <div class="feature-box">
+            Risk Classification
+        </div>
+
+        <div class="feature-box">
+            Emergency Detection
+        </div>
+
+        <div class="feature-box">
+            Hospital Recommendation
+        </div>
+
+        <div class="feature-box">
+            PDF Health Reports
+        </div>
+
+        <div class="feature-box">
+            AI Medical Insights
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
