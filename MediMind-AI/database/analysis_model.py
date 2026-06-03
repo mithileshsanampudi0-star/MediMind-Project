@@ -1,11 +1,14 @@
 from datetime import datetime
 
 from database.mongo import MongoDB
+from config import Config
 
 
 class AnalysisModel:
 
-    COLLECTION_NAME = "analyses"
+    COLLECTION_NAME = (
+        Config.ANALYSIS_COLLECTION
+    )
 
     @classmethod
     def collection(cls):
