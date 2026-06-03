@@ -6,6 +6,10 @@ document.addEventListener(
     "DOMContentLoaded",
     () => {
 
+        console.log(
+            "VOICE JS LOADED"
+        );
+
         initializeVoiceInput();
 
     }
@@ -24,6 +28,11 @@ function initializeVoiceInput() {
         );
 
     if (!voiceButton || !textarea) {
+
+        console.log(
+            "Voice button or textarea not found"
+        );
+
         return;
     }
 
@@ -38,6 +47,10 @@ function initializeVoiceInput() {
 
         voiceButton.disabled = true;
 
+        console.log(
+            "Speech Recognition not supported"
+        );
+
         return;
     }
 
@@ -50,6 +63,8 @@ function initializeVoiceInput() {
 
     recognition.interimResults = false;
 
+    recognition.maxAlternatives = 1;
+
     // =====================================
     // Start Recording
     // =====================================
@@ -58,14 +73,31 @@ function initializeVoiceInput() {
         "click",
         () => {
 
-            recognition.start();
-
-            voiceButton.innerText =
-                "Listening...";
-
-            voiceButton.classList.add(
-                "recording"
+            console.log(
+                "VOICE BUTTON CLICKED"
             );
+
+            try {
+
+                recognition.start();
+
+                voiceButton.innerText =
+                    "🎤 Listening...";
+
+                voiceButton.classList.add(
+                    "recording"
+                );
+
+            }
+
+            catch(error) {
+
+                console.log(
+                    "Start Error:",
+                    error
+                );
+
+            }
 
         }
     );
@@ -82,6 +114,11 @@ function initializeVoiceInput() {
                 event.results[0][0]
                 .transcript;
 
+            console.log(
+                "Transcript:",
+                transcript
+            );
+
             textarea.value +=
                 transcript + " ";
 
@@ -89,7 +126,7 @@ function initializeVoiceInput() {
     );
 
     // =====================================
-    // End
+    // End Recording
     // =====================================
 
     recognition.addEventListener(
@@ -107,22 +144,35 @@ function initializeVoiceInput() {
     );
 
     // =====================================
-    // Error
+    // Error Handling
     // =====================================
 
     recognition.addEventListener(
         "error",
-        () => {
+        event => {
+
+            console.log(
+                "VOICE ERROR:",
+                event.error
+            );
+
+            alert(
+                "Voice Error: " +
+                event.error
+            );
 
             voiceButton.innerText =
                 "Voice Error";
 
-            setTimeout(() => {
+            setTimeout(
+                () => {
 
-                voiceButton.innerText =
-                    "Start Voice Input";
+                    voiceButton.innerText =
+                        "Start Voice Input";
 
-            }, 2000);
+                },
+                2000
+            );
 
         }
     );
